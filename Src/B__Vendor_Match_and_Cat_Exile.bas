@@ -29,13 +29,6 @@ Set dataws = Sheets("Compiled")
                 CriteriaRange:=lookupws.Range("A13:A14"), _
                 Unique:=False
             
-'            If dataws.Range("A1:A" & lastrow).SpecialCells(xlCellTypeVisible).Count > 1 Then
-'                Sheets("Exiles").Range("A2:A" & dataws.Range("A2:A" & lastrow).SpecialCells(xlCellTypeVisible).Count + 1).EntireRow.Insert shift:=xlDown
-'                dataws.Range("A2:AD" & lastrow).SpecialCells(xlCellTypeVisible).Copy
-'                Sheets("Exiles").Paste Destination:=Sheets("Exiles").Range("A2")
-'                dataws.Range("A2:A" & lastrow).SpecialCells(xlCellTypeVisible).EntireRow.Delete
-'            End If
-            
             If dataws.Range("A1:A" & lastrow).SpecialCells(xlCellTypeVisible).Count > 1 Then
                 For Each cell In dataws.Range("O2:O" & lastrow).SpecialCells(xlCellTypeVisible)
                     cell.Value = 86
@@ -237,76 +230,6 @@ If Not IsError(dataws.Range("S" & i).Value) Then
         End If
     End If
 End If
-
-''--------------------------------------------------------
-'        'ODC Comment in Name 1 and 2
-''--------------------------------------------------------
-'    If dataws.Range("T" & i).Value <> "" Then
-'        Set matchfoundcell = venws.Range("B:B").Find(dataws.Range("T" & i).Value)
-'
-'        Do
-'            If Not matchfoundcell Is Nothing Then
-'                getout = 0
-'                matchfound = matchfoundcell.Row
-'                For j = 0 To UBound(findarray, 2)
-'                    If findarray(4, j) = 0 Then Exit For
-'                    If findarray(4, j) = matchfound Then getout = 1: Exit For
-'                Next j
-'
-'                If getout = 0 Then
-'                    If findarray(4, UBound(findarray, 2)) > 0 Then
-'                        fasize = UBound(findarray, 2) + 1
-'                        ReDim Preserve findarray(11, fasize)
-'                    End If
-'
-'                    For j = 0 To UBound(findarray, 2)
-'                        If findarray(4, j) = 0 Then
-'                            findarray(4, j) = matchfound
-'                            Exit For
-'                        End If
-'                    Next j
-'                End If
-'
-'                Set matchfoundcell = venws.Range("B:B").FindNext(matchfoundcell)
-'
-'            Else
-'                getout = 1
-'            End If
-'        Loop Until getout = 1
-'
-'
-'        Set matchfoundcell = venws.Range("C:C").Find(dataws.Range("T" & i).Value)
-'
-'        Do
-'            If Not matchfoundcell Is Nothing Then
-'                getout = 0
-'                matchfound = matchfoundcell.Row
-'                For j = 0 To UBound(findarray, 2)
-'                    If findarray(5, j) = 0 Then Exit For
-'                    If findarray(5, j) = matchfound Then getout = 1: Exit For
-'                Next j
-'
-'                If getout = 0 Then
-'                    If findarray(5, UBound(findarray, 2)) > 0 Then
-'                        fasize = UBound(findarray, 2) + 1
-'                        ReDim Preserve findarray(11, fasize)
-'                    End If
-'
-'                    For j = 0 To UBound(findarray, 2)
-'                        If findarray(5, j) = 0 Then
-'                            findarray(5, j) = matchfound
-'                            Exit For
-'                        End If
-'                    Next j
-'                End If
-'
-'                Set matchfoundcell = venws.Range("C:C").FindNext(matchfoundcell)
-'
-'            Else
-'                getout = 1
-'            End If
-'        Loop Until getout = 1
-'    End If
 
 
 '--------------------------------------------------------
@@ -543,17 +466,6 @@ If Not IsError(dataws.Range("X" & i).Value) Then
         End If
     End If
 End If
-''Report array
-'    For s = 0 To UBound(findarray, 1)
-'        For t = 0 To UBound(findarray, 2)
-'            reportstring = reportstring & "[" & findarray(s, t) & "]"
-'        Next t
-'        reportstring = reportstring & vbNewLine
-'    Next s
-'
-'    MsgBox (reportstring)
-'
-'    reportstring = ""
 
 '--------------------------------------------------------
     'Walk through entire array and compare found
@@ -624,10 +536,6 @@ End If
     'Assign priorities to each matchup
     'Create array of confidence scores
     'Figure out highest row
-
-    'reportstring = "Row: " & highestscore(0) & vbNewLine & "Score: " & highestscore(1)
-    'MsgBox (reportstring)
-    
     
     'Do the next row/entry
     ReDim findarray(11, 1)
